@@ -1,22 +1,28 @@
-import React, { useState } from 'react'
-import ItemCount from '../ItemCount'
+import React, { useState, useEffect} from 'react'
+import ItemList from '../ItemList'
 import './style.css'
 
-const ItemListContainer = (props) => {
+const ItemListContainer = () => {
 
-    const [ items ] = useState(props.items);
-    
+    const [ items, setItems ] = useState(null)
+
+    const productArray = [
+        {"id":1,"name":"celular 1", "count": 0},
+        {"id":2, "name":"celular 2", "count": 0},
+        {"id":3, "name":"celular 3", "count": 0}]
+
+    const products = async () => {
+        await new Promise((res) => setTimeout(res, 5000));
+        return setItems(productArray);
+    }
+
+    useEffect(() => {
+        products()
+    });
+
     return (
         <div className="col-12 bg-dark d-flex item-list-container" >
-            {items ? 
-                items.map(item => 
-                <div className="col-4 cardItem p-1">
-                    <div className="bg-light">
-                        <p className="text-center">{item.name}</p>
-                        <ItemCount item={item} />
-                    </div>
-                </div>) 
-                : <p className="text-light m-auto " >{props.default}</p>}
+            <ItemList items={items}/>
         </div>
     )
 }
