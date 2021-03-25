@@ -9,7 +9,7 @@ const Item = (props) => {
         <div className="col-4 cardItem p-1">
             <div className="bg-light">
                 <p className="text-center">{item.name}</p>
-                <ItemCount item={item} />
+                <ItemCount item={item} initial={0} />
             </div>
         </div>
     )

@@ -2,14 +2,14 @@ import React, { useState } from 'react'
 
 const ItemCount = (props) => {
 
-    const [ count, setCount ] = useState(props.item.count)
+    const [ count, setCount ] = useState(props.initial)
 
     function sumar() {
-        setCount(count + 1)
+        if(count < props.item.stock) setCount(count + 1)
     }
 
     function restar() {
-        if(count > 0) setCount(count - 1)
+        if(count > props.initial) setCount(count - 1)
     }
     
     return (
